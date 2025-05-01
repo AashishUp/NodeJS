@@ -7,4 +7,3 @@ console.log("CPU Cores:", os.cpus().length);
 console.log("Home directory:", os.homedir());
 console.log("Node version:", process.version);
 console.log("User info:", os.userInfo());
-
