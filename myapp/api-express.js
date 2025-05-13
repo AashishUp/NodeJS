@@ -58,7 +58,7 @@ app.put('/users/:id',(req,res)=>{
     res.json({message:'User updated:', user});   
 });
 
-port=3000;
+const port=3000;
 app.listen(port, 'localhost',()=>{
     console.log(`Server is running on http://localhost:${port}`);
 });
