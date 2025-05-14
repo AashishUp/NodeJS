@@ -42,5 +42,5 @@ app.use((req,res, next)=>{
 const port = 3001;
 console.log(`Server is running on port: ${port}`);
 app.listen(port, ()=>{  
-    console.log(`Server is running on port: https://localhost:${port}`);
+    console.log(`Server is running on port: http://localhost:${port}`);
 });

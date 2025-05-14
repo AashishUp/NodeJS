@@ -8,7 +8,7 @@ let products=[
     {name: "LG", id : 3003}
 ];
 app.get('/', (req, res)=>{
-    res.send('Home Page.')
+    res.send('Home Page.');
 })
 
 app.get('/search', (req, res)=>{
