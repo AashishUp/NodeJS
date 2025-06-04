@@ -7,6 +7,21 @@ app.use((req, res, next)=>{
     next();
 });
 
+function logger(req,res, next){
+    console.log(req.originalUrl);
+    next();
+
+}
+
+function Auth(req,res, next){
+    if (req.query.admin === 'true') {
+        req.admin = true;
+        next();
+    }
+    else{
+        res.send('Unauthorized');
+    }
+}
 
 app.get('/', Auth, (req, res, next) => {
     res.send('Home Page');
@@ -36,22 +51,6 @@ app.use((err, req, res, next)=>{
     console.error(err.stack);
     res.status(500).json({error: 'Something went wrong!'});
 });
-
-function logger(req,res, next){
-    console.log(req.originalUrl);
-    next();
-
-}
-
-function Auth(req,res, next){
-    if (req.query.admin === 'true') {
-        req.admin = true;
-        next();
-    }
-    else{
-        res.send('Unauthorized');
-    }
-}
 
 app.listen(3000, 'localhost', () => {   
     console.log('Server is running on http://localhost:3000');

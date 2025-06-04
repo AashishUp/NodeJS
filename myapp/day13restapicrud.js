@@ -43,13 +43,12 @@ app.post('/tasks', (req, res)=>{
 
 app.put('/tasks/:id', (req,res)=>{
     const id = parseInt(req.params.id);
-    const {title, completed}=req.body;
     const task = tasks.find(t=>t.id===id);
 
     if(!task) return res.status(404).json({message:"Tasks Not Found"});
 
-    task.title = title !== undefined ? title: task.title;
-    task.completed= completed !== undefined ? completed: task.completed;
+    task.title = req.body.title || task.title;
+    task.completed= req.body.completed || task.completed;
     res.json(task);
 });
 

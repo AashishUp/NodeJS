@@ -55,7 +55,7 @@ app.put('/users/:id',(req,res)=>{
         return res.status(404).json({message:'User not found'});
     }
     user.name =req.body.name || user.name;
-    res.json({message:'User updated:', user});   
+    res.json({message:'User updated:', user}); 
 });
 
 const port=3000;
