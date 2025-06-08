@@ -3,6 +3,7 @@ const bcrypt = require ('bcrypt');
 const db = require('../db');
 const router = express.Router();
 router.use(express.json());
+const jwt = require('jsonwebtoken');
 
 router.post('/signup', async(req, res)=>{
     const {username, password}= req.body;
@@ -24,7 +25,13 @@ router.post('/login', async (req,res)=>{
         const user = rows[0];
         const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch) return res.status(401).json({message: 'Invalid credentials'});
-        res.json({message:'Login successful'});
+
+        const token = jwt.sign({id: user.id, username: user.username}, process.env.JWT_SECRET, {
+            expiresIn: '1h'
+        });
+        
+        return res.status(200).json({message:'Login successful', token: token});
+        token
     } catch (err){
         res.status(500).json({error: 'Internal error'});
     }
